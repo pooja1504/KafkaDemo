@@ -3,11 +3,11 @@ var login = require('./services/login');
 var listdir = require('./services/listdir');
 var register = require('./services/register');
 var topic_namelogin = 'login_topic';
-var consumer_login = connection.getConsumer(topic_name);
+var consumer_login = connection.getConsumer(topic_namelogin);
 var producer = connection.getProducer();
 
 console.log('server is running');
-consumer.on('message', function (message) {
+consumer_login.on('message', function (message) {
     console.log('message received');
     console.log(JSON.stringify(message.value));
     var data = JSON.parse(message.value);
@@ -33,7 +33,7 @@ var topic_nameregister = 'register_topic';
 var consumer_register = connection.getConsumer(topic_nameregister);
 
 console.log('server is running');
-consumer.on('message', function (message) {
+consumer_register.on('message', function (message) {
     console.log('message received');
     console.log(JSON.stringify(message.value));
     var data = JSON.parse(message.value);

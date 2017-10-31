@@ -1,5 +1,8 @@
+var mongo = require('mongodb');
 var mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
+var mongodburl = 'mongodb://localhost:27017/User';
+//var mongoStore = require("connect-mongo")(expressSession);
 var Schema = mongoose.Schema;
 var UserSchema = new Schema({
 email: {
@@ -44,4 +47,4 @@ UserSchema.pre('save', function saveHook(next) {
 });
 
 
-module.exports = mongoose.model('KafkaDB', UserSchema);
+module.exports = mongoose.model('User', UserSchema);
