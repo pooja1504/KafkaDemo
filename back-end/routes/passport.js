@@ -22,17 +22,31 @@ module.exports = function(passport) {
                 }
             }
         });
-        /*try {
-            if(username == "bhavan@b.com" && password == "a"){
-                done(null,{username:"bhavan@b.com",password:"a"});
+    }));
+
+passport.use('local-signup', new LocalStrategy(function(req,username , password, done) {
+        console.log('in passport');
+        kafka.make_request('register_topic',{"username":username,"password":password,"firstName":req.body.firstName,"lastName":req.body.lastName}, function(err,results){
+            console.log('in result');
+            console.log(results);
+            if(err){
+                done(err,{});
             }
             else
-                done(null,false);
-        }
-        catch (e){
-            done(e,{});
-        }*/
+            {
+                if(results.code == 200){
+                    done(null,{username:"bhavan@b.com",password:"a"});
+                }
+                else {
+                    done(null,false);
+                }
+            }
+        });
     }));
+
+
 };
+
+
 
 

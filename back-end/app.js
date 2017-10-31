@@ -9,10 +9,9 @@ require('./routes/passport')(passport);
 var kafka = require('./routes/kafka/client');
 var routes = require('./routes/index');
 var users = require('./routes/users');
-var mongoSessionURL = "mongodb://localhost:27017/sessions";
+var mongoSessionURL = "mongodb://localhost:27017/KafkaDB";
 var expressSessions = require("express-session");
 var mongoStore = require("connect-mongo/es5")(expressSessions);
-
 var app = express();
 
 // view engine setup
@@ -45,7 +44,6 @@ app.use(expressSessions({
     })
 }));
 app.use(passport.initialize());
-
 app.use('/', routes);
 app.use('/users', users);
 
@@ -71,9 +69,20 @@ app.post('/login', function(req, res) {
         return res.status(201).send({username:"test"});
     })(req, res);
 });
+app.post('/signup',function(req,res){
+passport.authenticate('local-signup', function(err, user) {
+        if(err) {
+            res.status(500).send();
+        }
 
+        if(!user) {
+            res.status(401).send();
+        }
+        return res.status(201).send({username:"test"});
+    })(req, res);
+});
 app.post('/listdir',function(req,res){
-var dir = req.param("dir");
+var dir = req.body.dir;
 console.log(dir);
 kafka.make_request('listdir_topic',{"dirname":dir}, function(err,results){
             console.log('in result');
@@ -84,7 +93,7 @@ kafka.make_request('listdir_topic',{"dirname":dir}, function(err,results){
             else
             {
                 if(results){
-                    res.send({filelist:results});
+                    res.send({filelist:results,status:201});
                 }
                 else {
                     res.send({status:200});
