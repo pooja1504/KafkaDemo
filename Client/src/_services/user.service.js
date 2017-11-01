@@ -21,7 +21,6 @@ function login(username, password) {
 
     return fetch('http://localhost:3001/login', requestOptions)
         .then((response) => response.json()).then((responseJson) => {
-            console.log("pooja"+responseJson.results.status);
     return responseJson;
 });
 }

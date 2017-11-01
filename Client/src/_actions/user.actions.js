@@ -23,11 +23,10 @@ function login(email, password) {
         userService.login(email, password)
             .then(
                 responseJson => { 
-                    if(responseJson.status==200)
+                    if(responseJson.code==200)
                     {
-                    console.log("in actions " + responseJson.user.email + responseJson.status);
-                    dispatch(success(responseJson.user));
-                    history.push('/UserDetails');
+                    //dispatch(success(responseJson.user));
+                    history.push('/ListDir');
                     }
                 
                 else

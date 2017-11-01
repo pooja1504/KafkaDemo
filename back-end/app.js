@@ -70,7 +70,7 @@ console.log(req.body.username);
         console.log(req.session.user);
         console.log("session initilized");
         //return res;
-        return res.status(201).send({username:user.username});
+        return res.status(201).send(user);
     })(req,res,next);
 });
 app.post('/signup',function(req,res,next){

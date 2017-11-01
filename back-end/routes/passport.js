@@ -16,7 +16,7 @@ module.exports = function(passport) {
             else
             {
                 if(results.code == 200){
-                    done(null,{username:results.username,password:results.password});
+                    done(null,results);
                 }
                 else {
                     done(null,false);

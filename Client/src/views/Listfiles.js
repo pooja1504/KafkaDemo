@@ -18,9 +18,7 @@ class Listfiles extends React.Component {
     constructor(props) {
         super(props);
     }
-    componentDidMount() {
-        this.props.addTodoNew()
-    }
+
     handleShare(file){
         console.log(file);
         console.log("hey its handleShare in Fileupload");
@@ -44,7 +42,7 @@ class Listfiles extends React.Component {
             <div style={{backgroundColor: '',width:1000,height:800}}>
             <div class="row">
             <div className="col-sm-4">
-            <Navpage/>
+            
             </div>
             <div className="col-sm-6">
             <div className="card-body"> 
@@ -55,6 +53,7 @@ class Listfiles extends React.Component {
                 {this.props.fileList.length > 0 ? 
                     this.props.fileList.map((file) => {
                         return ( <div>
+                            
                             <button className="btn btn-primary" onClick= ""><img src={require('../Star.png')}/></button> 
                             <DownloadLink
                                 filename={file}
@@ -95,7 +94,6 @@ function mapStateToProps(data) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        addTodoNew : () => dispatch(listfileaction.listfiles()),
         sharefileaction:(data) => dispatch(listfileaction.sharefileaction(data)),
         deleteaction: (data)=> dispatch(listfileaction.deletefile(data))
     };
