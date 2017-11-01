@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-
 class ListFiles extends Component {
 
     static propTypes = {
@@ -13,6 +12,7 @@ class ListFiles extends Component {
     };
 
     componentWillMount(){
+        console.log("its listfiles");
         this.setState({
             username : this.props.username
         });

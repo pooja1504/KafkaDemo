@@ -6,9 +6,6 @@ import './App.css';
 
 import {BrowserRouter} from 'react-router-dom';
 import NewerHomePage from "./components/NewerHomePage";
-
-import ListDir from "./components/ListDir";
-import ListFiles from "./components/ListFiles";
 // import HomePage from "./components/HomePage";
 
     class App extends Component {

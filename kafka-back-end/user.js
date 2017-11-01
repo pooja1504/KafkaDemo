@@ -1,7 +1,7 @@
 var mongo = require('mongodb');
 var mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
-var mongodburl = 'mongodb://localhost:27017/User';
+var mongodburl = 'mongodb://localhost:27017/KafkaDB';
 //var mongoStore = require("connect-mongo")(expressSession);
 var Schema = mongoose.Schema;
 var UserSchema = new Schema({

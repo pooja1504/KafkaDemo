@@ -54,8 +54,11 @@ app.post('/logout', function(req,res) {
     res.status(200).send();
 });
 
-app.post('/login', function(req, res) {
+app.post('/login', function(req, res,next) {
+console.log(req.body.username);
+    console.log("its login in app.js");
     passport.authenticate('login', function(err, user) {
+        console.log("its user"+user);
         if(err) {
             res.status(500).send();
         }
@@ -66,20 +69,28 @@ app.post('/login', function(req, res) {
         req.session.user = user.username;
         console.log(req.session.user);
         console.log("session initilized");
-        return res.status(201).send({username:"test"});
-    })(req, res);
+        //return res;
+        return res.status(201).send({username:user.username});
+    })(req,res,next);
 });
-app.post('/signup',function(req,res){
-passport.authenticate('local-signup', function(err, user) {
-        if(err) {
-            res.status(500).send();
-        }
-
-        if(!user) {
-            res.status(401).send();
-        }
-        return res.status(201).send({username:"test"});
-    })(req, res);
+app.post('/signup',function(req,res,next){
+    console.log(req.body);
+kafka.make_request('register_topic',req.body, function(err,results){
+            console.log('in result');
+            console.log(results);
+            if(err){
+              res.status(500).send();
+            }
+            else
+            {
+                if(results.code == 200){
+                    return res.status(201).send(results);
+                }
+                else {
+                    res.status(500).send();
+                }
+            }
+        });
 });
 app.post('/listdir',function(req,res){
 var dir = req.body.dir;
