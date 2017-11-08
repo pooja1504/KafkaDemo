@@ -39,22 +39,21 @@ class Listfiles extends React.Component {
             const {item} = this.props;
             const { listoffiles  } = this.props;
         return (
-            <div style={{backgroundColor: '',width:1000,height:800}}>
-            <div class="row">
-            <div className="col-sm-4">
-            
-            </div>
+            <div style={{width:500,height:800}}>
+            <div className="row">
+
             <div className="col-sm-6">
-            <div className="card-body"> 
-            {this.props.fileList.length > 0 ?
-            <div><h1> Your files </h1>
+            <div className="card-body">
+                <h4><b>Dropbox</b></h4>
+
+            <div><h4> Your files </h4>
             <br/>
             <br/></div> : ''}        
                 {this.props.fileList.length > 0 ? 
                     this.props.fileList.map((file) => {
                         return ( <div>
                             
-                            <button className="btn btn-primary" onClick= ""><img src={require('../Star.png')}/></button> 
+                            <button className="btn btn-primary" onClick= ""><img src={require('../Star.png')}/></button>
                             <DownloadLink
                                 filename={file}
                                 label= {file}
@@ -75,6 +74,7 @@ class Listfiles extends React.Component {
                </div>
                {this.props.fileList.length > 0 ? 
                 <Logout/> : '' }
+
                </div>
            
         );

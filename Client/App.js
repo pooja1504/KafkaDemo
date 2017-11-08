@@ -9,7 +9,7 @@ import { HomePage } from '../views/HomePage';
 import { LoginPage } from '../views/LoginPage';
 import { RegisterPage } from '../views/RegisterPage';
 import Listfiles from '../views/Listfiles';
-
+import mainhomeleftnav from './views/mainhomeleftnav';
 class App extends React.Component {
     constructor(props) {
         super(props);
@@ -36,6 +36,7 @@ class App extends React.Component {
                                 <Route path="/login" component={LoginPage} />
                                 <Route path="/register" component={RegisterPage} />
                                 <Route path="/Listfiles" component={Listfiles} />
+                                <Route path="/mainhomeleftnav" component={mainhomeleftnav}/>
                             </div>
                         </Router>
                     </div>

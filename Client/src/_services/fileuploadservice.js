@@ -23,6 +23,18 @@ export const uploadFile = (payload,mypic) =>
             console.log("This is error");
             return error;
         });
+export const folderupload = (myfolder) =>
+    fetch(`${api}/folderupload`, {
+        method: 'POST',
+        credentials:'include',
+        mode:'cors',
+        body: myfolder
+    }).then(res => {
+        return res.status;
+    }).catch(error => {
+        console.log("This is error");
+        return error;
+    });
 
 export const listfiles= () =>
 fetch(`${api}/listfiles`, {

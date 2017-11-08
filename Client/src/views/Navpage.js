@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import Fileupload from './Fileupload';
 import Listfiles from './Listfiles';
 import { history } from '../_helpers';
+import mainhomeleftnav from './Mainhomeleftnav';
 
 
 
@@ -11,7 +12,6 @@ class NavPage extends React.Component {
 render() {
         return (
         <div >
-        
         <img src={require('../Dropbox.png')} style={{width: 100, height: 100, align: 'left'}}/><h1> Dropbox </h1>
         
         <div role="list" class="ui list" floated="left">

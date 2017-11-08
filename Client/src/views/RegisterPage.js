@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-
+import mainhomeleftnav from './Mainhomeleftnav';
 import { userActions } from '../_actions';
 
 class RegisterPage extends React.Component {
@@ -50,6 +50,7 @@ class RegisterPage extends React.Component {
         return (
 
              <div id="background" style={{backgroundColor: '',height:600,width:800}}>
+                 <mainhomeleftnav/>
             <div className="col-md-3">
             <img src={require('../Dropbox.png')} style={{width: 100, height: 100, align: 'left'}}/><h1> Dropbox </h1>
             <img src={require('../DropboxMain.png')} style={{width: 350, height: 300, align: 'left'}}/>

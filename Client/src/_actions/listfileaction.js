@@ -66,4 +66,17 @@ export function sendfileforshare(payload, sharing_email) {
            
             );}
   }
+  export function folderupload(myfolder){
+      console.log("its func"+myfolder);
+      return function(dispatch){
+          fileuploadservice.folderupload(myfolder)
+              .then((responseJson) => {
+                      console.log("its Listfiles actions");
+                      console.log(responseJson);
+                      dispatch(updateListFiles(responseJson));
+                  },
+
+              );}
+
+  }
 
