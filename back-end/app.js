@@ -11,6 +11,7 @@ var routes = require('./routes/index');
 var users = require('./routes/users');
 var handlefolder = require('./routes/handlefolder');
 var handlefilelisting = require('./routes/handlefilelisting');
+var handleuserdetails=require('./routes/handleuserdetails')
 var mongoSessionURL = "mongodb://localhost:27017/KafkaDB";
 var expressSessions = require("express-session");
 var mongoStore = require("connect-mongo/es5")(expressSessions);
@@ -49,7 +50,8 @@ app.use(passport.initialize());
 app.use('/', routes);
 app.use('/users', users);
 app.post('/folderupload',handlefolder.folderupload);
-app.get('./listfiles',handlefilelisting.listfiles);
+app.post('/listfiles',handlefilelisting.listfiles);
+app.post('/userdetails',handleuserdetails.userdetails);
 
 app.post('/logout', function(req,res) {
     console.log(req.session.user);
@@ -70,7 +72,7 @@ console.log(req.body.username);
         if(!user) {
             res.status(401).send();
         }
-        req.session.user = user.username;
+        req.session.username = user.username;
         console.log(req.session.user);
         console.log("session initilized");
         //return res;

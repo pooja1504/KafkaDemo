@@ -3,6 +3,8 @@ var login = require('./services/login');
 var listdir = require('./services/listdir');
 var register = require('./services/register');
 var folderupload = require('./services/folderupload');
+var listfiles = require('./services/listfiles');
+var userdetails = require('./services/userdetails');
 var topic_namelogin = 'login_topic';
 var consumer_login = connection.getConsumer(topic_namelogin);
 var producer = connection.getProducer();
@@ -90,6 +92,56 @@ consumer_folderupload.on('message', function (message) {
     console.log(JSON.stringify(message.value));
     var data = JSON.parse(message.value);
     folderupload.handle_folderuploadrequest(data.data, function(err,res){
+        console.log('after handle'+res);
+        var payloads = [
+            { topic: data.replyTo,
+                messages:JSON.stringify({
+                    correlationId:data.correlationId,
+                    data : res
+                }),
+                partition : 0
+            }
+        ];
+        producer.send(payloads, function(err, data){
+            console.log(data);
+        });
+        return;
+    });
+});
+
+var topic_namelistfiles = 'listfiles_topic';
+var consumer_listfiles = connection.getConsumer(topic_namelistfiles);
+console.log('server is running');
+consumer_listfiles.on('message', function (message) {
+    console.log('folderupload message received');
+    console.log(JSON.stringify(message.value));
+    var data = JSON.parse(message.value);
+    listfiles.handle_listfilesrequest(data.data, function(err,res){
+        console.log('after handle'+res);
+        var payloads = [
+            { topic: data.replyTo,
+                messages:JSON.stringify({
+                    correlationId:data.correlationId,
+                    data : res
+                }),
+                partition : 0
+            }
+        ];
+        producer.send(payloads, function(err, data){
+            console.log(data);
+        });
+        return;
+    });
+});
+
+var topic_nameuserdetails = 'userdetails_topic';
+var consumer_userdetails = connection.getConsumer(topic_nameuserdetails);
+console.log('server is running');
+consumer_userdetails.on('message', function (message) {
+    console.log('userdetails message received');
+    console.log(JSON.stringify(message.value));
+    var data = JSON.parse(message.value);
+    userdetails.handle_userdetailsrequest(data.data, function(err,res){
         console.log('after handle'+res);
         var payloads = [
             { topic: data.replyTo,

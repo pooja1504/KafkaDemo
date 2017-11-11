@@ -4,20 +4,17 @@ import { connect } from 'react-redux';
 import Mainhomeleftnav from './Mainhomeleftnav';
 import { userActions } from '../_actions';
 import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
+import DownloadLink from 'react-download-link';
 class UserDetails extends React.Component {
     constructor(props) {
         super(props);
     }
     componentWillMount()
     {
-        const {dispatch}= this.props;
-        console.log("hey");
-        //dispatch(userActions.getDetails());
+        this.props.getDetails();
 
     }
     render() {
-        console.log(this.props.userdata.length);
-        console.log(this.props.userdata.firstName);
         return (
             <div>
                 <div className="container-fluid" style={{backgroundColor:'#FAFAFA'}}>
@@ -26,7 +23,6 @@ class UserDetails extends React.Component {
                             <div className="col-md-4 col-lg-4 col-lg-pull-4" style={{width:10,paddingTop:20}}>
                                 <Mainhomeleftnav/>
                             </div>
-
                             <div className="col-md-7" style={{paddingTop:20}}>
                                 <h4>Dropbox</h4>
                                 <div className="input-group stylish-input-group">
@@ -39,7 +35,19 @@ class UserDetails extends React.Component {
                                 </div>
                                 <br/>
                                 <br/>
-                                {this.props.userdata}
+                                fnh
+                                {this.props.userdata.length > 0 ?
+                                    this.props.userdata.map((file) => {
+                                        return(
+                                                <div>
+                                                    hey
+                                                    <DownloadLink
+                                                        filename={file}
+                                                        label= {file}
+                                                    />
+                                                </div>);
+                                    }) : ''
+                                }
                             </div>
 
                         </div>
@@ -59,5 +67,9 @@ function mapStateToProps(data) {
     }
     return {userdata};
 }
-
-export default connect(mapStateToProps)(UserDetails); 
+function mapDispatchToProps(dispatch) {
+    return {
+       getDetails: ()=> dispatch(userActions.getDetails())
+    };
+}
+export default connect(mapStateToProps,mapDispatchToProps)(UserDetails);

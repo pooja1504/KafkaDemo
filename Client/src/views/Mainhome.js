@@ -6,7 +6,12 @@ import Mainhomeleftnav from './Mainhomeleftnav';
 import ListDir from './ListDir';
 import Fileupload from'./Fileupload';
 import { history } from '../_helpers';
+import { userActions } from '../_actions';
 class Mainhome extends React.Component {
+    constructor(props) {
+        super(props);
+        this.handleUser = this.handleUser.bind(this);
+    }
     handleUser()
     {
         history.push("/UserDetails");
@@ -52,4 +57,4 @@ class Mainhome extends React.Component {
     }
 }
 
-export default Mainhome;
+export default connect(null,null)(Mainhome);

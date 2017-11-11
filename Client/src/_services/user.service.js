@@ -54,12 +54,17 @@ function checksession(){
 
 function getDetails()
 {
-   // return fetch('http://localhost:3001/getDetails');
-      const responseJson={
-          firstName:"pooja"
-      }
-      console.log(responseJson);
-       return responseJson ;
+    const requestOptions = {
+        method: 'POST',
+        credentials:'include',
+        mode:'cors',
+        headers: { ...headers,'Content-Type': 'application/json'},
+    };
+
+    return fetch('http://localhost:3001/userdetails', requestOptions)
+        .then((response) => response.json()).then((responseJson) => {
+            return responseJson;
+        });
 }
 function logout() {
     history.push('/login');

@@ -18,7 +18,7 @@ function listfiles() {
             .then((responseJson) => {
                console.log("its Listfiles actions");
                console.log(responseJson);
-                dispatch(updateListFiles(responseJson));
+                dispatch(updateListFiles(responseJson.files));
             },
             );}
   }
@@ -72,6 +72,7 @@ export function sendfileforshare(payload, sharing_email) {
           fileuploadserv.folderupload(myfolder)
               .then((responseJson) => {
                   dispatch(listfiles());
+                  history.push('/Listfiles');
               });
       }
 

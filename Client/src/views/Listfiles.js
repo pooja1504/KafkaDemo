@@ -1,11 +1,9 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
-import * as fileuploadservice from '../_services/fileuploadservice';
-//import ImageGridList from "./ImageGridList";
-//import TextField from 'material-ui/TextField';
-//import Typography from 'material-ui/Typography';
 import * as listfileaction from '../_actions/listfileaction';
-//import {SelectableList} from 'material-ui/SelectableList';
+import Mainhomeleftnav from './Mainhomeleftnav';
+import {Table, Column} from 'react-table-for-bootstrap';
+import Fileupload from'./Fileupload';
 import DownloadLink from 'react-download-link';
 import Navpage from './Navpage';
 import Logout from './Logout';
@@ -39,44 +37,55 @@ class Listfiles extends React.Component {
             const {item} = this.props;
             const { listoffiles  } = this.props;
         return (
-            <div style={{width:500,height:800}}>
-            <div className="row">
+            <div>
+                <div className="container-fluid" style={{backgroundColor:'#FAFAFA'}}>
+                    <div>
+                        <div className="row">
+                            <div className="col-md-4 col-lg-4 col-lg-pull-4" style={{width:10,paddingTop:20}}>
+                                <Mainhomeleftnav/>
+                            </div>
 
-            <div className="col-sm-6">
-            <div className="card-body">
-                <h4><b>Dropbox</b></h4>
-
-            <div><h4> Your files </h4>
-            <br/>
-            <br/></div> : ''}        
-                {this.props.fileList.length > 0 ? 
-                    this.props.fileList.map((file) => {
-                        return ( <div>
-                            
-                            <button className="btn btn-primary" onClick= ""><img src={require('../Star.png')}/></button>
-                            <DownloadLink
-                                filename={file}
-                                label= {file}
-                                />
-                                <button className="btn btn-primary" onClick= {()=>this.handleShare(file)}>Share</button> 
-                                <button className="btn btn-primary" onClick= {()=>this.deletefile(file)}>Delete</button>  
+                            <div className="col-md-7" style={{paddingTop:20}}>
+                                <h4>Dropbox</h4>
+                                <div className="input-group stylish-input-group">
+                                    <input type="text" className="form-control"  placeholder="Search"/>
+                                    <span className="input-group-addon">
+                                        <button type="submit">
+                                            <span className="glyphicon glyphicon-search"></span>
+                                        </button>
+                                    </span>
+                                </div>
                                 <br/>
                                 <br/>
-                            </div>);
-                    })
-                    
-                    : <div><h1>You are Not logged In</h1>
-                    <button className="btn btn-primary" onClick= {()=>this.signin()}>SignIn</button></div>
+                                {this.props.fileList.length > 0 ?
+                                    this.props.fileList.map((file) => {
+                                        return ( <div>
 
-                }
-                 </div>
-                 </div>
-               </div>
-               {this.props.fileList.length > 0 ? 
-                <Logout/> : '' }
+                                            <DownloadLink
+                                                filename={file}
+                                                label= {file}
+                                            />
+                                            {/*<button className="btn btn-primary" onClick= {()=>this.handleShare(file)}>Share</button>
+                                <button className="btn btn-primary" onClick= {()=>this.deletefile(file)}>Delete</button>  */}
+                                            <br/>
+                                            <br/>
+                                        </div>);
+                                    })
 
-               </div>
-           
+                                    : history.push('/login')
+
+                                }
+                            </div>
+                            <div className="col-md-4 col-lg-4 col-lg-push-4" style={{backgroundColor:'#FAFAFA',width:270}}>
+                                <br/>
+                                &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+                                <img src={require('../images/user.png')} style={{width:40,height:40,float:'center'}} onClick={this.handleUser}/>
+                                <Fileupload/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         );
     }
 }
@@ -85,8 +94,8 @@ function mapStateToProps(data) {
     let fileList = [];
     console.log("in component ----- ");
     if(data.listoffiles.files !== undefined) {
-        fileList = data.listoffiles.files.files;
-        console.log(data.listoffiles.files.files);  
+        fileList = data.listoffiles.files;
+        console.log("yes"+data.listoffiles.files);
         
     }
     return {fileList};
