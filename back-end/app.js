@@ -50,8 +50,10 @@ app.use(passport.initialize());
 app.use('/', routes);
 app.use('/users', users);
 app.post('/folderupload',handlefolder.folderupload);
+app.post('/sharefolder',handlefolder.sharefolder);
 app.post('/listfiles',handlefilelisting.listfiles);
 app.post('/userdetails',handleuserdetails.userdetails);
+app.put('/edituserdetails',handleuserdetails.edituserdetails);
 
 app.post('/logout', function(req,res) {
     console.log(req.session.user);

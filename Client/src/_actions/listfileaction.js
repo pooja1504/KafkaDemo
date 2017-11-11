@@ -7,11 +7,7 @@ import {fileuploadserv} from '../_services/fileuploadservice';
 export const LIST_FILES = 'LIST_FILES';
 export const FILE_SHARE = 'FILE_SHARE';
 export const AFTER_SHARE = 'AFTER_SHARE';
-export const listfileactions = {
-    listfiles,
-    folderupload
-};
-function listfiles() {
+export function listfiles() {
     console.log("its list");
        return function(dispatch){
 	fileuploadserv.listfiles()
@@ -66,7 +62,7 @@ export function sendfileforshare(payload, sharing_email) {
            
             );}
   }
-  function folderupload(myfolder){
+  export function folderupload(myfolder){
       console.log("its func"+myfolder);
       return function(dispatch){
           fileuploadserv.folderupload(myfolder)
@@ -80,13 +76,13 @@ export function sendfileforshare(payload, sharing_email) {
 export function sharefolder(mysharedfolder,sharedemail){
     console.log("its func"+mysharedfolder+sharedemail);
     return function(dispatch){
-        fileuploadserv.sharefolder(mysharedfolder,sharedemail);
-        /*.then((myfolder) => {
+        fileuploadserv.sharefolder(mysharedfolder,sharedemail)
+        .then((res) => {
                 console.log("its Listfiles actions");
-                console.log(myfolder);
-                //dispatch(updateListFiles(myfolder));
+                console.log(res);
+                dispatch(listfiles());
             }
 
-        );*/
+        );
     }
 }

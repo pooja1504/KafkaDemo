@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import * as fileuploadservice from '../_services/fileuploadservice';
-import {listfileactions} from '../_actions/listfileaction';
+import * as listfileaction from '../_actions/listfileaction';
 import { history } from '../_helpers';
 import Accordion from 'react-responsive-accordion';
 import Panel from 'react-bootstrap';
@@ -83,13 +83,13 @@ class Fileupload extends React.Component {
        const {myfolder}= this.state;
        console.log(this.state.myfolder);
         const { dispatch } = this.props;
-        dispatch(listfileactions.folderupload(myfolder));
+        dispatch(listfileaction.folderupload(myfolder));
     }
     ShareFolder()
     {
         const {mysharedfolder,sharedemail} =this.state;
         const { dispatch } = this.props;
-            dispatch(listfileactions.sharefolder(mysharedfolder,sharedemail));
+            dispatch(listfileaction.sharefolder(mysharedfolder,sharedemail));
     }
 
     render(){

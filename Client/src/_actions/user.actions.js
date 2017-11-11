@@ -10,6 +10,7 @@ export const userActions = {
    checksession,
     register,
     getDetails,
+    edituserdetails
    // delete: _delete
    //listfiles
 };
@@ -48,25 +49,7 @@ function logout() {
     return { type: userConstants.LOGOUT };
 }
 
-function getDetails() {
-    console.log("hryy");
-    return dispatch => {
-        userService.getDetails()
-            .then(responseJson => {
-                    if(responseJson)
-                    {
-                        const user= responseJson;
-                        dispatch(successuserdetails(user));
-                    }
 
-                    else
-                    {
-                        console.log("hii");
-                    }
-                } );
-    };
-    function successuserdetails(user){return { type: userConstants.USER_DETAILS,user}}
-}
 function register(user) {
      console.log(user);
     return dispatch => {
@@ -114,6 +97,40 @@ function checksession()
            } );
     };
     function success(user) { return { type: userConstants.LOGIN_SUCCESS, user } }
+}
+function getDetails() {
+    return dispatch => {
+        userService.getDetails()
+            .then(responseJson => {
+                if(responseJson)
+                {
+                    const user= responseJson;
+                    dispatch(successuserdetails(user));
+                }
+
+                else
+                {
+                    console.log("hii");
+                }
+            } );
+    };
+    function successuserdetails(user){return { type: userConstants.USER_DETAILS,user}}
+}
+function edituserdetails(user) {
+    console.log(user);
+    return dispatch => {
+
+        userService.edituserdetails(user)
+            .then(
+                user => {
+                    dispatch(getDetails());
+                    history.push('/UserDetails');
+                },
+                error => {
+                    history.push('/login');
+                }
+            );
+    };
 }
 
 // prefixed function name with underscore because delete is a reserved word in javascript

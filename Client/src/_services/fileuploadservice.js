@@ -26,7 +26,7 @@ function folderupload(myfolder)
 function sharefolder(mysharedfolder,sharedemail)
 {
     console.log("its sharedfolder in fileuploadserv"+mysharedfolder,sharedemail);
-    fetch(`${api}/sharefolder`, {
+    return fetch(`${api}/sharefolder`, {
         method: 'POST',
         mode:'cors',
         credentials:'include',
@@ -38,7 +38,6 @@ function sharefolder(mysharedfolder,sharedemail)
         console.log("This is error");
         return error;
     });
-    return mysharedfolder;
 }
 export const getImages = () =>
     fetch(`${api}/files/`)

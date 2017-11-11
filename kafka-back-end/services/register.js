@@ -13,12 +13,12 @@ mongo.connect(mongoURL, function(){
     password=msg.password;
     firstName=msg.firstName;
     lastName=msg.lastName;
-    coll.insert({username: username, password:password, firstName:firstName, lastName:lastName}, function(err, user){
+    coll.insert({username: username, password:password, firstName:firstName,lastName:lastName,work:'',education:'',phone:''}, function(err, user){
         console.log(err)
         console.log('user',user) 
         if (err){ 
         res.code = "401";
-        res.value = "Failed Login";
+        res.value = "Failed Registration";
         callback(null, res);
     }
     else

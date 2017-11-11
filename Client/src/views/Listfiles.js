@@ -16,6 +16,10 @@ class Listfiles extends React.Component {
     constructor(props) {
         super(props);
     }
+    componentWillMount()
+    {
+        this.props.listfiles();
+    }
 
     handleShare(file){
         console.log(file);
@@ -57,14 +61,16 @@ class Listfiles extends React.Component {
                                 </div>
                                 <br/>
                                 <br/>
+                                <button style={{bsSize:"xsmall"}} className="glyphicon glyphicon-star"></button>
+                                <listGroup componentClass="ul">
                                 {this.props.fileList.length > 0 ?
                                     this.props.fileList.map((file) => {
                                         return ( <div>
-
-                                            <DownloadLink
+                                            <button style={{bsSize:"xsmall"}} className="glyphicon glyphicon-star"></button>
+                                            <li><DownloadLink
                                                 filename={file}
                                                 label= {file}
-                                            />
+                                            /></li>
                                             {/*<button className="btn btn-primary" onClick= {()=>this.handleShare(file)}>Share</button>
                                 <button className="btn btn-primary" onClick= {()=>this.deletefile(file)}>Delete</button>  */}
                                             <br/>
@@ -72,9 +78,10 @@ class Listfiles extends React.Component {
                                         </div>);
                                     })
 
-                                    : history.push('/login')
+                                    : ''
 
                                 }
+                                </listGroup>
                             </div>
                             <div className="col-md-4 col-lg-4 col-lg-push-4" style={{backgroundColor:'#FAFAFA',width:270}}>
                                 <br/>
@@ -104,7 +111,8 @@ function mapStateToProps(data) {
 function mapDispatchToProps(dispatch) {
     return {
         sharefileaction:(data) => dispatch(listfileaction.sharefileaction(data)),
-        deleteaction: (data)=> dispatch(listfileaction.deletefile(data))
+        deleteaction: (data)=> dispatch(listfileaction.deletefile(data)),
+        listfiles: ()=> dispatch(listfileaction.listfiles())
     };
 }
 export default connect(mapStateToProps,mapDispatchToProps)(Listfiles); 

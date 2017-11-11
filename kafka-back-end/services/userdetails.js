@@ -9,7 +9,7 @@ function handle_userdetailsrequest(msg, callback){
     mongo.connect(mongoURL, function(){
         console.log('Connected to mongo at: ' + mongoURL);
         var coll = mongo.collection('users');
-        coll.findOne({username:"pooja@gmail.com"}, function(err, user){
+        coll.findOne({username:"dev@gmail.com"}, function(err, user){
             if (user) {
                 res.code="200";
                 res.user=user;
@@ -18,7 +18,7 @@ function handle_userdetailsrequest(msg, callback){
             } else {
                 console.log("its error in login");
                 res.status="401";
-                res.value = "Failed Login";
+                res.value = "Failed to get UserDetails";
                 callback(null, res);
             }
         });

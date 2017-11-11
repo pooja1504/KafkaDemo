@@ -18,7 +18,7 @@ import Mainhome from './views/Mainhome';
 import Mainhomeleftnav from './views/Mainhomeleftnav';
 import Fileleftnav from './views/Fileleftnav';
 import MainFilePage from "./views/MainFilePage";
-import Trialtable from "./views/Trialtable";
+import EditUserDetails from "./views/EditUserDetails";
 
 
 class App extends React.Component {
@@ -58,7 +58,7 @@ class App extends React.Component {
                                 <Route path="/Mainhomeleftnav" component={Mainhomeleftnav}/>
                                 <Route path="/Fileleftnav" component={Fileleftnav}/>
                                 <Route path="/MainFilePage" component={MainFilePage}/>
-                                <Route path="/Trialtable" component={Trialtable}/>
+                                <Route path="/EditUserDetails" component={EditUserDetails}/>
 
                                 
                             </div>

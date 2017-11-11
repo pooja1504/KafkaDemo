@@ -3,8 +3,10 @@ var login = require('./services/login');
 var listdir = require('./services/listdir');
 var register = require('./services/register');
 var folderupload = require('./services/folderupload');
+var sharefolder = require('./services/sharefolder');
 var listfiles = require('./services/listfiles');
 var userdetails = require('./services/userdetails');
+var edituserdetails = require('./services/edituserdetails');
 var topic_namelogin = 'login_topic';
 var consumer_login = connection.getConsumer(topic_namelogin);
 var producer = connection.getProducer();
@@ -142,6 +144,56 @@ consumer_userdetails.on('message', function (message) {
     console.log(JSON.stringify(message.value));
     var data = JSON.parse(message.value);
     userdetails.handle_userdetailsrequest(data.data, function(err,res){
+        console.log('after handle'+res);
+        var payloads = [
+            { topic: data.replyTo,
+                messages:JSON.stringify({
+                    correlationId:data.correlationId,
+                    data : res
+                }),
+                partition : 0
+            }
+        ];
+        producer.send(payloads, function(err, data){
+            console.log(data);
+        });
+        return;
+    });
+});
+
+var topic_nameedituserdetails = 'edituserdetails_topic';
+var consumer_edituserdetails = connection.getConsumer(topic_nameedituserdetails);
+console.log('server is running');
+consumer_edituserdetails.on('message', function (message) {
+    console.log('edituserdetails message received');
+    console.log(JSON.stringify(message.value));
+    var data = JSON.parse(message.value);
+    edituserdetails.handle_edituserdetailsrequest(data.data, function(err,res){
+        console.log('after handle'+res);
+        var payloads = [
+            { topic: data.replyTo,
+                messages:JSON.stringify({
+                    correlationId:data.correlationId,
+                    data : res
+                }),
+                partition : 0
+            }
+        ];
+        producer.send(payloads, function(err, data){
+            console.log(data);
+        });
+        return;
+    });
+});
+
+var topic_namesharefolder = 'sharefolder_topic';
+var consumer_sharefolder = connection.getConsumer(topic_namesharefolder);
+console.log('server is running');
+consumer_sharefolder.on('message', function (message) {
+    console.log('folderupload message received');
+    console.log(JSON.stringify(message.value));
+    var data = JSON.parse(message.value);
+    sharefolder.handle_sharefolderrequest(data.data, function(err,res){
         console.log('after handle'+res);
         var payloads = [
             { topic: data.replyTo,

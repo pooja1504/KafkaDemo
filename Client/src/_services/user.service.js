@@ -5,7 +5,8 @@ export const userService = {
    logout,
     register,
     checksession,
-    getDetails
+    getDetails,
+    edituserdetails
 };
 const headers = {
     'Accept': 'application/json'
@@ -69,18 +70,17 @@ function getDetails()
 function logout() {
     history.push('/login');
 }
-
-/*function update(user) {
+function edituserdetails(user) {
     const requestOptions = {
         method: 'PUT',
         headers: { ...authHeader(), 'Content-Type': 'application/json' },
         body: JSON.stringify(user)
     };
-
-    return fetch('/users/' + user.id, requestOptions).then(handleResponse);;
+    return fetch('http://localhost:3001/edituserdetails', requestOptions)
+        .then((response) => response.json()).then((responseJson) => {
+        return responseJson;
+    });
 }
-
-*/
 function handleResponse(response) 
 {
     if (!response.ok) { 
