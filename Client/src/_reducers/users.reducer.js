@@ -24,6 +24,11 @@ export function users(state = {}, action) {
             : user
         )
       };
+      case userConstants.USER_DETAILS:
+        return{
+            ...state,
+            userdetails:action.user
+        }
     case userConstants.DELETE_SUCCESS:
       // remove deleted user from state
       return {

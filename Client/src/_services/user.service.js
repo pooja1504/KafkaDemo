@@ -4,7 +4,8 @@ export const userService = {
     login,
    logout,
     register,
-    checksession
+    checksession,
+    getDetails
 };
 const headers = {
     'Accept': 'application/json'
@@ -51,14 +52,15 @@ function checksession(){
 });
 }
 
-/*function getuserdetails()
+function getDetails()
 {
-    fetch('http://localhost:3001/getuserdetails').then((response) => response.json()).then((responseJson) => {
-       console.log(responseJson);
-       return responseJson; 
+   // return fetch('http://localhost:3001/getDetails');
+      const responseJson={
+          firstName:"pooja"
+      }
+      console.log(responseJson);
+       return responseJson ;
 }
-)
-}*/
 function logout() {
     history.push('/login');
 }

@@ -1,6 +1,45 @@
 const api = process.env.REACT_APP_CONTACTS_API_URL || 'http://localhost:3001'
-
-
+export const fileuploadserv = {
+    folderupload,
+    sharefolder,
+    listfiles
+};
+const headers = {
+    'Accept': 'application/json'
+};
+function folderupload(myfolder)
+{
+    console.log("its folder in fileuploadserv"+myfolder);
+    return fetch('http://localhost:3001/folderupload', {
+        method: 'POST',
+        mode: 'cors',
+        credentials: 'include',
+        headers: {...headers, 'Content-Type': 'application/json'},
+        body: JSON.stringify({myfolder})
+    }).then((response) => response.json()).then((responseJson) => {
+            return responseJson;
+    }).catch(error => {
+        console.log("This is error");
+        return error;
+    });
+}
+function sharefolder(mysharedfolder,sharedemail)
+{
+    console.log("its sharedfolder in fileuploadserv"+mysharedfolder,sharedemail);
+    fetch(`${api}/sharefolder`, {
+        method: 'POST',
+        mode:'cors',
+        credentials:'include',
+        headers: { ...headers,'Content-Type': 'application/json' },
+        body: JSON.stringify({mysharedfolder,sharedemail})
+    }).then(res => {
+        return res.status;
+    }).catch(error => {
+        console.log("This is error");
+        return error;
+    });
+    return mysharedfolder;
+}
 export const getImages = () =>
     fetch(`${api}/files/`)
         .then(res => res.json())
@@ -10,7 +49,6 @@ export const getImages = () =>
         });
 
 export const uploadFile = (payload,mypic) =>
-//console.log(uploadFiles);
 
     fetch(`${api}/files/upload`, {
         method: 'POST',
@@ -23,35 +61,20 @@ export const uploadFile = (payload,mypic) =>
             console.log("This is error");
             return error;
         });
-export const folderupload = (myfolder) =>
-    fetch(`${api}/folderupload`, {
+
+function listfiles() {
+    return fetch(`${api}/listfiles`, {
         method: 'POST',
-        credentials:'include',
-        mode:'cors',
-        body: myfolder
-    }).then(res => {
-        return res.status;
+        credentials: 'include',
+        mode: 'cors'
+    }).then((response) => response.json()).then((responseJson) => {
+        console.log("hii its response JSon" + responseJson);
+        return responseJson;
     }).catch(error => {
         console.log("This is error");
         return error;
     });
-
-export const listfiles= () =>
-fetch(`${api}/listfiles`, {
-        method: 'POST',
-        credentials:'include',
-        mode:'cors'
-       // body: payload
-    }).then((response) => response.json()).then((responseJson) => {
-        console.log("hii its response JSon"+ responseJson);
-                return responseJson;
-    //}).then(res => {
-        //return res.status;
-    }).catch(error => {
-            console.log("This is error");
-            return error;
-        });
-
+}
    export const starfile = (payload) =>
    fetch(`${api}/starfile`, {
         method: 'POST',

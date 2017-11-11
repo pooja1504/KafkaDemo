@@ -12,7 +12,7 @@ class NavPage extends React.Component {
 render() {
         return (
         <div >
-        <img src={require('../Dropbox.png')} style={{width: 100, height: 100, align: 'left'}}/><h1> Dropbox </h1>
+        <img src={require('../images/Dropbox.png')} style={{width: 100, height: 100, align: 'left'}}/><h1> Dropbox </h1>
         
         <div role="list" class="ui list" floated="left">
         <div role="listitem" class="item">

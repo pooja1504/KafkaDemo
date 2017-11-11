@@ -20,6 +20,7 @@ import Fileleftnav from './views/Fileleftnav';
 import MainFilePage from "./views/MainFilePage";
 import Trialtable from "./views/Trialtable";
 
+
 class App extends React.Component {
     constructor(props) {
         super(props);
@@ -58,6 +59,7 @@ class App extends React.Component {
                                 <Route path="/Fileleftnav" component={Fileleftnav}/>
                                 <Route path="/MainFilePage" component={MainFilePage}/>
                                 <Route path="/Trialtable" component={Trialtable}/>
+
                                 
                             </div>
                         </Router>

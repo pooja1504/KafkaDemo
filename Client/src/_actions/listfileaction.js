@@ -1,27 +1,27 @@
 //import { userConstants } from '../_constants';
 //import { userService } from '../_services';
 //import { alertActions } from './';
-
 import { history } from '../_helpers';
-import * as fileuploadservice from '../_services/fileuploadservice';
+import { userService } from '../_services';
+import {fileuploadserv} from '../_services/fileuploadservice';
 export const LIST_FILES = 'LIST_FILES';
 export const FILE_SHARE = 'FILE_SHARE';
 export const AFTER_SHARE = 'AFTER_SHARE';
-
-export function listfiles() {
-	//return dispatch => {
-       // dispatch(request({ reponseJson }));
+export const listfileactions = {
+    listfiles,
+    folderupload
+};
+function listfiles() {
+    console.log("its list");
        return function(dispatch){
-	fileuploadservice.listfiles()
+	fileuploadserv.listfiles()
             .then((responseJson) => {
                console.log("its Listfiles actions");
                console.log(responseJson);
                 dispatch(updateListFiles(responseJson));
             },
-           
             );}
   }
-
 export function updateListFiles(responseJson) {
 console.log("hey its update list files");
 console.log(responseJson);
@@ -42,7 +42,7 @@ export function sendfileforshare(payload, sharing_email) {
   console.log(payload);
   console.log("its sendfileforshare email"+sharing_email);
   return function(dispatch){
-        fileuploadservice.sharefile(payload,sharing_email)
+        fileuploadserv.sharefile(payload,sharing_email)
             .then((responseJson) => {
                 console.log("its sendfileforshare actions");
                 console.log(responseJson);
@@ -58,7 +58,7 @@ export function sendfileforshare(payload, sharing_email) {
   }  
   export function deletefile(file){
     return function(dispatch){
-  fileuploadservice.deletefile(file)
+  fileuploadserv.deletefile(file)
             .then((responseJson) => {
                console.log(responseJson);
                 dispatch(updateListFiles(responseJson));
@@ -66,17 +66,26 @@ export function sendfileforshare(payload, sharing_email) {
            
             );}
   }
-  export function folderupload(myfolder){
+  function folderupload(myfolder){
       console.log("its func"+myfolder);
       return function(dispatch){
-          fileuploadservice.folderupload(myfolder)
+          fileuploadserv.folderupload(myfolder)
               .then((responseJson) => {
-                      console.log("its Listfiles actions");
-                      console.log(responseJson);
-                      dispatch(updateListFiles(responseJson));
-                  },
-
-              );}
+                  dispatch(listfiles());
+              });
+      }
 
   }
+export function sharefolder(mysharedfolder,sharedemail){
+    console.log("its func"+mysharedfolder+sharedemail);
+    return function(dispatch){
+        fileuploadserv.sharefolder(mysharedfolder,sharedemail);
+        /*.then((myfolder) => {
+                console.log("its Listfiles actions");
+                console.log(myfolder);
+                //dispatch(updateListFiles(myfolder));
+            }
 
+        );*/
+    }
+}

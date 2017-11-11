@@ -13,10 +13,10 @@ function folderupload(req,res)
         else
         {
             if(results){
-                res.send({filelist:results,status:201});
+                res.send(results);
             }
             else {
-                res.send({status:200});
+                res.send({status:401});
             }
         }
     });

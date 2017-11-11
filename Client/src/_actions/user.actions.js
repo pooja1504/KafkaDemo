@@ -2,7 +2,6 @@ import { userConstants } from '../_constants';
 import { userService } from '../_services';
 import { alertActions } from './';
 import { history } from '../_helpers';
-import * as fileuploadservice from '../_services/fileuploadservice';
 
 
 export const userActions = {
@@ -10,7 +9,7 @@ export const userActions = {
    logout,
    checksession,
     register,
-    //getAll,
+    getDetails,
    // delete: _delete
    //listfiles
 };
@@ -49,6 +48,25 @@ function logout() {
     return { type: userConstants.LOGOUT };
 }
 
+function getDetails() {
+    console.log("hryy");
+    return dispatch => {
+        userService.getDetails()
+            .then(responseJson => {
+                    if(responseJson)
+                    {
+                        const user= responseJson;
+                        dispatch(successuserdetails(user));
+                    }
+
+                    else
+                    {
+                        console.log("hii");
+                    }
+                } );
+    };
+    function successuserdetails(user){return { type: userConstants.USER_DETAILS,user}}
+}
 function register(user) {
      console.log(user);
     return dispatch => {

@@ -7,7 +7,7 @@ function handle_listdirrequest(msg, callback){
     console.log(testFolder);
     fs.readdir(testFolder, function (err, files) 
     {
-        console.log("filelist 6rf6rtf"+files);
+        console.log("filelist"+files);
         res = files;
         callback(null, res);
     });

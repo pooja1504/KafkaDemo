@@ -12,10 +12,32 @@ class MainFilePage extends React.Component {
     render() {
         return (
             <div>
-                <div className="row">
-                    <div className="a col-md-6 col-lg-6" style={{width:100}}><ListDir/></div>
-                    <div className="a col-md-6 col-lg-6 col-lg-pull-6"><Fileleftnav/></div>
-                    <div className="a col-md-2 col-lg-2"><Fileupload/></div>
+                <div className="container-fluid" style={{backgroundColor:'#FAFAFA'}}>
+                    <div>
+                        <div className="row">
+                            <div className="col-md-4 col-lg-4 col-lg-pull-4" style={{width:10,paddingTop:20}}>
+                                <Fileleftnav/>
+                            </div>
+
+                            <div className="col-md-7" style={{paddingTop:20}}>
+                                <h4>Dropbox</h4>
+                                <div className="input-group stylish-input-group">
+                                    <input type="text" className="form-control"  placeholder="Search"/>
+                                    <span className="input-group-addon">
+                                        <button type="submit">
+                                            <span className="glyphicon glyphicon-search"></span>
+                                        </button>
+                                    </span>
+                                </div>
+                                <br/>
+                                <br/>
+                                <ListDir/>
+                            </div>
+                            <div className="col-md-4 col-lg-4 col-lg-push-4" style={{backgroundColor:'#FAFAFA',width:270}}>
+                                <Fileupload/>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 

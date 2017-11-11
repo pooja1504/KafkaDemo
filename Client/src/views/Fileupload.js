@@ -1,8 +1,10 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import * as fileuploadservice from '../_services/fileuploadservice';
-import * as listfileaction from '../_actions/listfileaction';
+import {listfileactions} from '../_actions/listfileaction';
 import { history } from '../_helpers';
+import Accordion from 'react-responsive-accordion';
+import Panel from 'react-bootstrap';
 
 class Fileupload extends React.Component {
     constructor(props) {
@@ -13,11 +15,18 @@ class Fileupload extends React.Component {
 
         this.state = {
             myfolder:'',
-            trial:false
+            mysharedfolder:'',
+            sharedemail:'',
+            folderuploadbool:false,
+            sharefolderbool:false
         };
         this.handleFolderupload = this.handleFolderupload.bind(this);
         this.handleFolderChange = this.handleFolderChange.bind(this);
+        this.handleSharedFolderChange = this.handleSharedFolderChange.bind(this);
+        this.handleShareFolder = this.handleShareFolder.bind(this);
         this.FolderUpload =this.FolderUpload.bind(this);
+        this.ShareFolder =this.ShareFolder.bind(this);
+
     }
 
 
@@ -55,51 +64,79 @@ class Fileupload extends React.Component {
         history.push('/Fileshare');
     }
     handleFolderupload(){
-        //const {trial} = this.state;
+        this.setState({ folderuploadbool: true});
+    }
+    handleShareFolder(){
+        this.setState({ sharefolderbool: true});
 
-        this.setState({ trial: true});
-        console.log(this.state.trial);
     }
     handleFolderChange(e){
-
             const { name, value } = e.target;
             this.setState({ [name]: value });
+    }
+    handleSharedFolderChange(e){
+        const { name, value } = e.target;
+        this.setState({ [name]: value });
     }
     FolderUpload()
     {
        const {myfolder}= this.state;
-        console.log(this.state.myfolder);
-        this.props.folderupload(myfolder);
-
+       console.log(this.state.myfolder);
+        const { dispatch } = this.props;
+        dispatch(listfileactions.folderupload(myfolder));
+    }
+    ShareFolder()
+    {
+        const {mysharedfolder,sharedemail} =this.state;
+        const { dispatch } = this.props;
+            dispatch(listfileactions.sharefolder(mysharedfolder,sharedemail));
     }
 
     render(){
-        const { trial} = this.state;
-        const {myfolder } = this.state;
-        console.log(trial);
+
+        const { folderuploadbool,sharefolderbool} = this.state;
+        const {myfolder,mysharedfolder,sharedemail} = this.state;
+        var upButton ={
+            textAlign: 'Center',
+            paddingLeft:5,
+            paddingRight: 5,
+            backgroundColor:'#205FDE',
+            width:200
+        };
             return (
 
                 <div style={{backgroundColor: '', width: 1000, height: 800}}>
                     <div className="col-sm-4">
-                        <h4><b> Upload your files here </b></h4>
-                        <button className="btn-primary" style={{width: 100}}>
-                            <input className={'fileupload'} type="file" name="mypic" onChange={this.handleFileUpload}
-                                   style={{width: 75}}/>
-                        </button>
+
+                        <br/>
+                        <label className="btn btn-primary" style={upButton}>
+                            Upload Files<input type="file" onChange={this.handleFileUpload}/>
+                        </label>
                         <br/>
                         <br/>
-                        <button className="btn-primary" style={{width: 100}} onClick={this.handleFolderupload}> New Folder</button><br/><br/>
-                        {trial ?
-                            <div>Enter Folder name : <input type="text" name="myfolder" value={myfolder} onChange={this.handleFolderChange}/><br/>
+                        <img src={require('../images/folder.png')}/> &nbsp;&nbsp;
+                        <button className="btn-link" style={{color:'blue'}} onClick={this.handleShareFolder}> New Shared Folder</button><br/><br/>
+                        <img src={require('../images/folder.png')} rounded/> &nbsp;&nbsp;
+                        <button className="btn-link" style={{color:'blue'}} onClick={this.handleFolderupload}> New Folder</button><br/><br/>
+                        {folderuploadbool ?
+                            <div>Enter Folder name : <input type="text" name="myfolder" style={{width:75}} value={myfolder} onChange={this.handleFolderChange}/><br/>
                             <button className="btn-primary" style={{width: 100}} onClick={this.FolderUpload}>Add</button></div>
                         : ''
                     }
+                        {sharefolderbool ?
+                            <div>Enter Folder name : <input type="text" name="mysharedfolder" style={{width:100}} value={mysharedfolder} onChange={this.handleSharedFolderChange}/><br/>
+                                Share with:&emsp; &emsp; &emsp; &emsp;
+                                <input type="email" name="sharedemail" style={{width:100}} value={sharedemail} onChange={this.handleSharedFolderChange}/>
+                               <br/>
+                                <button className="btn-primary" style={{width: 100}} onClick={this.ShareFolder}>Add</button></div>
+                            : ''
+                        }
                     </div>
                 </div>
         );
     }
 }
-function mapStateToProps(data) {
+/*function mapStateToProps(data) {
     let fileList = [];
     if(data.listoffiles.files !== undefined) {
         fileList = data.listoffiles.files.files;
@@ -107,12 +144,13 @@ function mapStateToProps(data) {
         
     }
     return {fileList};
-}
-function mapDispatchToProps(dispatch) {
+}*/
+/*function mapDispatchToProps(dispatch) {
     return {
         addTodoNew : () => dispatch(listfileaction.listfiles()),
         sharefileaction:(data) => dispatch(listfileaction.sharefileaction(data)),
-        folderupload : (data) => dispatch(listfileaction.folderupload(data))
+        folderupload : (data) => dispatch(listfileaction.folderupload(data)),
+        //sharefolder: (data) => dispatch(listfileaction.sharefolder(data))
     };
-}
-export default connect(mapStateToProps,mapDispatchToProps)(Fileupload);
+}*/
+export default connect(null,null)(Fileupload);

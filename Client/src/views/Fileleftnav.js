@@ -8,10 +8,8 @@ class Fileleftnav extends React.Component {
         return (
             <div>
                 <div>
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <img src={require('../Dropbox.png')} style={{width: 50, height: 50}}/>
-                    <br/>
-                    <br/>
                     <ul name="leftnavmenu" id="leftnavmenu">
+                        <img src={require('../images/Dropbox.png')} style={{width: 50, height: 50}}/><br/><br/>
                         <a href="/Mainhome">Home</a> <br/><br/>
                         <a href="/MainFilePage">MyFiles</a> <br/><br/>
                         <a href="/">Sharing</a><br/><br/>

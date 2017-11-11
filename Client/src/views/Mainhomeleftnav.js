@@ -7,15 +7,11 @@ class Mainhomeleftnav extends React.Component {
     render() {
         return (
             <div>
-                <div>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <img src={require('../Dropbox.png')} style={{width: 50, height: 50}}/>
-                    <br/>
-                    <br/>
-                <ul name="leftnavmenu" id="leftnavmenu">
-                    <a href="/Mainhome">Home</a> <br/><br/>
-                    <a href="/MainFilePage">Files</a><br/><br/>
-                </ul>
-                </div>
+                    <ul name="leftnavmenu" id="leftnavmenu">
+                        <img src={require('../images/Dropbox.png')} style={{width: 40, height: 40}}/><br/><br/>
+                        <a href="/Mainhome">Home</a> <br/><br/>
+                        <a href="/MainFilePage">Files</a><br/><br/>
+                    </ul>
             </div>
     );
     }

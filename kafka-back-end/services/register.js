@@ -1,6 +1,7 @@
 
 var mongo = require('mongodb');
 var mongo = require("./mongo");
+var fs = require('fs');
 var mongoURL = "mongodb://localhost:27017/KafkaDB";
 function handle_registerrequest(msg, callback){
 var res = {};
@@ -28,6 +29,7 @@ mongo.connect(mongoURL, function(){
         res.password = msg.password;
         res.firstName = msg.firstName;
         res.lastName = msg.lastName;
+        fs.mkdir("./uploads/"+msg.email);
         callback(null, res);
     }  
     });

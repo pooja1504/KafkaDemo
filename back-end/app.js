@@ -10,6 +10,7 @@ var kafka = require('./routes/kafka/client');
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var handlefolder = require('./routes/handlefolder');
+var handlefilelisting = require('./routes/handlefilelisting');
 var mongoSessionURL = "mongodb://localhost:27017/KafkaDB";
 var expressSessions = require("express-session");
 var mongoStore = require("connect-mongo/es5")(expressSessions);
@@ -48,6 +49,7 @@ app.use(passport.initialize());
 app.use('/', routes);
 app.use('/users', users);
 app.post('/folderupload',handlefolder.folderupload);
+app.get('./listfiles',handlefilelisting.listfiles);
 
 app.post('/logout', function(req,res) {
     console.log(req.session.user);
