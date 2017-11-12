@@ -2,7 +2,9 @@ const api = process.env.REACT_APP_CONTACTS_API_URL || 'http://localhost:3001'
 export const fileuploadserv = {
     folderupload,
     sharefolder,
-    listfiles
+    listfiles,
+    deletefile,
+    starfile
 };
 const headers = {
     'Accept': 'application/json'
@@ -47,45 +49,37 @@ export const getImages = () =>
             return error;
         });
 
-export const uploadFile = (payload,mypic) =>
+export const uploadFile = (payload) =>
 
     fetch(`${api}/files/upload`, {
         method: 'POST',
         credentials:'include',
         mode:'cors',
-        body: payload
+        headers: { ...headers,'Content-Type': 'application/json' },
+        body: JSON.stringify({payload})
     }).then(res => {
-        return res.status;
+        return res;
     }).catch(error => {
             console.log("This is error");
             return error;
         });
 
-function listfiles() {
-    return fetch(`${api}/listfiles`, {
+
+function starfile(payload) {
+    console.log(payload);
+    return fetch(`${api}/starfile`, {
         method: 'POST',
         credentials: 'include',
-        mode: 'cors'
-    }).then((response) => response.json()).then((responseJson) => {
-        console.log("hii its response JSon" + responseJson);
-        return responseJson;
+        mode: 'cors',
+        headers: { ...headers,'Content-Type': 'application/json' },
+        body: JSON.stringify({payload})
+    }).then(res => {
+        return res.status;
     }).catch(error => {
         console.log("This is error");
         return error;
     });
 }
-   export const starfile = (payload) =>
-   fetch(`${api}/starfile`, {
-        method: 'POST',
-        credentials:'include',
-        mode:'cors',
-        body: payload
-    }).then(res => {
-        return res.status;
-    }).catch(error => {
-            console.log("This is error");
-            return error;
-        });
 export const sharefile = (payload,sharing_email) =>
    fetch(`${api}/sharefile`, {
         method: 'POST',
@@ -99,17 +93,30 @@ export const sharefile = (payload,sharing_email) =>
             console.log("This is error");
             return error;
         });
-
-    export const deletefile= (file)=>
-    fetch(`${api}/deletefile`, {
+function listfiles() {
+    return fetch(`${api}/listfiles`, {
         method: 'POST',
-        credentials:'include',
-        mode:'cors',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ file})
+        credentials: 'include',
+        mode: 'cors'
     }).then((response) => response.json()).then((responseJson) => {
-                return responseJson;
+        console.log("hii its response JSon" + responseJson);
+        return responseJson;
     }).catch(error => {
-            console.log("This is error");
-            return error;
-        });
+        console.log("This is error");
+        return error;
+    });
+}
+function deletefile(file) {
+    return fetch(`${api}/deletefile`, {
+        method: 'POST',
+        credentials: 'include',
+        mode: 'cors',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({file})
+    }).then((response) => response.json()).then((responseJson) => {
+        return responseJson;
+    }).catch(error => {
+        console.log("This is error");
+        return error;
+    });
+}

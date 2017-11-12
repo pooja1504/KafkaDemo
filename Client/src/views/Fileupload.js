@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 import * as fileuploadservice from '../_services/fileuploadservice';
 import * as listfileaction from '../_actions/listfileaction';
 import { history } from '../_helpers';
-import Accordion from 'react-responsive-accordion';
-import Panel from 'react-bootstrap';
+import MainFilePage from './MainFilePage';
+
 
 class Fileupload extends React.Component {
     constructor(props) {
@@ -29,33 +29,24 @@ class Fileupload extends React.Component {
 
     }
 
-
+    handleUser()
+    {
+        history.push("/UserDetails");
+    }
     handleFileUpload = (event) => {
         const payload = new FormData();
         payload.append('mypic', event.target.files[0]);
         console.log("inside handleUpoad");
         console.log(payload);
         fileuploadservice.uploadFile(payload)
-            .then((status) => {
-                if (status === 204) {
+            .then((res) => {
+                if (res.status === 204) {
                     console.log("file uploaded");
                    this.props.addTodoNew();
+                    history.push('/MainFilePage');
                 }
             });
 
-    };
-    handleStar(file){
-       const payload = file;
-       console.log(payload);
-        console.log("inside handleSubmit for starfile");
-        //console.log(payload.fieldName);
-        fileuploadservice.starfile(payload)
-            .then((status) => {
-                if (status === 204) {
-                    console.log("file starred in Listfiles.js");
-                   this.props.addTodoNew();
-                }
-            });
     };
     handleShare(file){
         console.log(file);
@@ -107,7 +98,8 @@ class Fileupload extends React.Component {
 
                 <div style={{backgroundColor: '', width: 1000, height: 800}}>
                     <div className="col-sm-4">
-
+                        <img src={require('../images/user.png')} style={{width:40,height:40,float:'center'}} onClick={this.handleUser}/>
+                        <br/>
                         <br/>
                         <label className="btn btn-primary" style={upButton}>
                             Upload Files<input type="file" onChange={this.handleFileUpload}/>
@@ -145,12 +137,12 @@ class Fileupload extends React.Component {
     }
     return {fileList};
 }*/
-/*function mapDispatchToProps(dispatch) {
+function mapDispatchToProps(dispatch) {
     return {
         addTodoNew : () => dispatch(listfileaction.listfiles()),
         sharefileaction:(data) => dispatch(listfileaction.sharefileaction(data)),
         folderupload : (data) => dispatch(listfileaction.folderupload(data)),
         //sharefolder: (data) => dispatch(listfileaction.sharefolder(data))
     };
-}*/
-export default connect(null,null)(Fileupload);
+}
+export default connect(null,mapDispatchToProps)(Fileupload);

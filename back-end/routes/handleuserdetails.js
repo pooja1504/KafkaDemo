@@ -2,7 +2,7 @@ var kafka = require('./kafka/client');
 var ejs = require('ejs');
 function userdetails(req,res)
 {
-    kafka.make_request('userdetails_topic',req.body, function(err,results){
+    kafka.make_request('userdetails_topic',{"username":req.session.username}, function(err,results){
         console.log('in result');
         console.log(results);
         if(err){

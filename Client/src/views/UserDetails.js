@@ -31,7 +31,7 @@ class UserDetails extends React.Component {
                                 <Mainhomeleftnav/>
                             </div>
                             <div className="col-md-7" style={{paddingTop:20}}>
-                                <h4>Dropbox</h4>
+                                <h3>Dropbox</h3>
                                 <div className="input-group stylish-input-group">
                                     <input type="text" className="form-control"  placeholder="Search"/>
                                     <span className="input-group-addon">
@@ -42,39 +42,58 @@ class UserDetails extends React.Component {
                                 </div>
                                 <br/>
                                 <br/>
-                                {/*<table>
-                                    <thead>
-                                    <tr>
-                                        <th>#</th>
-                                        <th>Table heading</th>
-                                        <th>Table heading</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Table cell</td>
-                                        <td style={{float:'right'}}>yes</td>
-                                    </tr>
-                                    </tbody>
-                                </table>*/}
-                                {this.props.userdata.length}
                                 {this.props.userdata.length > 0 ?
-                                    Object.keys(this.props.userdata).map(function(s){
-                                        return(
-                                        <div>{this.props.userdata[s].name}</div>
-                                        );}
-                                    )
-                                     : "hey"
+                                    this.props.userdata.map((file) => {
+                                        return (
+                                         <div>
+                                             <h3>Personal Account:</h3>
+
+                                             <div className="panel panel-default" style={{width:600}}>
+                                                 <div className="panel-heading">
+                                                     <h3 className="panel-title">Basic</h3>
+                                                 </div>
+                                                 <div className="panel-body">
+                                                     <ul>
+                                                     <li className="list-group-item" style={{width:500}}><label>Email: </label>
+                                                         <label style={{float:'right'}}>{file.username}</label></li>
+                                                     <li className="list-group-item" style={{width:500}}><label>Password: </label>
+                                                         <label style={{float:'right'}}>{file.password}</label></li>
+                                                     <li className="list-group-item" style={{width:500}}><label>FirstName: </label>
+                                                         <label style={{float:'right'}}>{file.firstName}</label></li>
+                                                     <li className="list-group-item" style={{width:500}}><label>LastName:</label>
+                                                         <label style={{float:'right'}}>{file.lastName}</label></li>
+                                                     </ul>
+                                                 </div>
+                                             </div>
+
+                                                 <div className="panel panel-default" style={{width:600}}>
+                                                     <div className="panel-heading">
+                                                         <h3 className="panel-title">Preferences</h3>
+                                                     </div>
+                                                     <div className="panel-body">
+                                                         <ul>
+                                                        <li className="list-group-item" style={{width:500}}><label>Work:</label>
+                                                        <label style={{float:'right'}}>{file.work}</label></li>
+                                                        <li className="list-group-item" style={{width:500}}><label>Education:</label>
+                                                        <label style={{float:'right'}}>{file.education}</label></li><li className="list-group-item" style={{width:500}}><label>Phone Number:</label>
+                                                        <label style={{float:'right'}}>{file.phone}</label></li>
+                                                         </ul>
+                                                     </div>
+                                                </div>
+
+
+                                        </div>);
+                                    })
+
+                                    : ''
+
                                 }
-                                <br/>
-                                <button className="btn btn-primary"  onClick={this.handleEditDetails} style={{width:70,height:30}}></button>
+                                <button className="btn btn-primary"  onClick={this.handleEditDetails} style={{width:70,height:30}}>Edit</button>
                             </div>
                             <div className="col-md-4 col-lg-4 col-lg-push-4" style={{backgroundColor:'#FAFAFA',width:270}}>
                                 <br/>
 
                                 &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-                                <img src={require('../images/user.png')} style={{width:40,height:40,float:'center'}} onClick={this.handleUser}/>
                                 <Fileupload/>
                             </div>
                         </div>
@@ -89,9 +108,10 @@ function mapStateToProps(data) {
     let userdata = [];
     console.log("in component ----- ");
     if(data.users.userdetails !== undefined) {
-        userdata = data.users.userdetails.user;
-        console.log(userdata);
+        userdata.push(data.users.userdetails.user);
+
     }
+    console.log(userdata);
     return {userdata};
 }
 function mapDispatchToProps(dispatch) {

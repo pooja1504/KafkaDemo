@@ -1,9 +1,9 @@
-var fs = require("fs-extra");
+var copydir = require('copy-dir');
 var testFolder = './';
 function handle_sharefolderrequest(msg, callback){
     var res = {};
     console.log("its sharedfolder"+msg.mysharedfolder+"its shared email"+msg.sharedemail);
-    fs.copy('./uploads/pooja/hiyu', './uploads/dev@gmail.com', function (err) {
+    copydir('./uploads/pooja/hiyu', './uploads/dev@gmail.com', function (err) {
         if (err){
             console.log('An error occured while copying the folder.')
             console.error(err);

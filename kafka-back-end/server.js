@@ -1,12 +1,15 @@
 var connection =  new require('./kafka/Connection');
 var login = require('./services/login');
 var listdir = require('./services/listdir');
+var starfile = require('./services/starfile');
 var register = require('./services/register');
 var folderupload = require('./services/folderupload');
 var sharefolder = require('./services/sharefolder');
+var deletefile = require('./services/deletefile');
 var listfiles = require('./services/listfiles');
 var userdetails = require('./services/userdetails');
 var edituserdetails = require('./services/edituserdetails');
+var fileupload = require('./services/fileupload');
 var topic_namelogin = 'login_topic';
 var consumer_login = connection.getConsumer(topic_namelogin);
 var producer = connection.getProducer();
@@ -68,6 +71,32 @@ consumer_listdir.on('message', function (message) {
     console.log(JSON.stringify(message.value));
     var data = JSON.parse(message.value);
     listdir.handle_listdirrequest(data.data, function(err,res){
+        console.log('after handle'+res);
+        var payloads = [
+            { topic: data.replyTo,
+                messages:JSON.stringify({
+                    correlationId:data.correlationId,
+                    data : res
+                }),
+                partition : 0
+            }
+        ];
+        console.log("its payload in server"+payloads.topic);
+        producer.send(payloads, function(err, data){
+            console.log(data);
+        });
+        return;
+    });
+});
+
+var topic_fileupload = 'fileupload_topic';
+var consumer_fileupload = connection.getConsumer(topic_fileupload);
+console.log('server is running');
+consumer_fileupload.on('message', function (message) {
+    console.log('listdir message received');
+    console.log(JSON.stringify(message.value));
+    var data = JSON.parse(message.value);
+    fileupload.handle_fileuploadrequest(data.data, function(err,res){
         console.log('after handle'+res);
         var payloads = [
             { topic: data.replyTo,
@@ -194,6 +223,55 @@ consumer_sharefolder.on('message', function (message) {
     console.log(JSON.stringify(message.value));
     var data = JSON.parse(message.value);
     sharefolder.handle_sharefolderrequest(data.data, function(err,res){
+        console.log('after handle'+res);
+        var payloads = [
+            { topic: data.replyTo,
+                messages:JSON.stringify({
+                    correlationId:data.correlationId,
+                    data : res
+                }),
+                partition : 0
+            }
+        ];
+        producer.send(payloads, function(err, data){
+            console.log(data);
+        });
+        return;
+    });
+});
+
+var topic_namedeletefile = 'deletefile_topic';
+var consumer_deletefile = connection.getConsumer(topic_namedeletefile);
+console.log('server is running');
+consumer_deletefile.on('message', function (message) {
+    console.log('folderupload message received');
+    console.log(JSON.stringify(message.value));
+    var data = JSON.parse(message.value);
+    deletefile.handle_deletefilerequest(data.data, function(err,res){
+        console.log('after handle'+res);
+        var payloads = [
+            { topic: data.replyTo,
+                messages:JSON.stringify({
+                    correlationId:data.correlationId,
+                    data : res
+                }),
+                partition : 0
+            }
+        ];
+        producer.send(payloads, function(err, data){
+            console.log(data);
+        });
+        return;
+    });
+});
+var topic_namestarfile = 'starfile_topic';
+var consumer_starfile = connection.getConsumer(topic_namestarfile);
+console.log('server is running');
+consumer_starfile.on('message', function (message) {
+    console.log('folderupload message received');
+    console.log(JSON.stringify(message.value));
+    var data = JSON.parse(message.value);
+    starfile.handle_starfilerequest(data.data, function(err,res){
         console.log('after handle'+res);
         var payloads = [
             { topic: data.replyTo,

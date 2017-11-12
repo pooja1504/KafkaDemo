@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import * as listfileaction from '../_actions/listfileaction';
 import Mainhomeleftnav from './Mainhomeleftnav';
 import {Table, Column} from 'react-table-for-bootstrap';
+import {fileuploadserv} from '../_services/fileuploadservice';
 import Fileupload from'./Fileupload';
 import DownloadLink from 'react-download-link';
 import Navpage from './Navpage';
@@ -27,6 +28,19 @@ class Listfiles extends React.Component {
         this.props.sharefileaction(file);
         history.push('/Fileshare');
     }
+    handleStar(file){
+        const payload = file;
+        console.log(payload);
+        console.log("inside handleSubmit for starfile");
+        //console.log(payload.fieldName);
+        fileuploadserv.starfile(payload)
+            .then((status) => {
+                if (status === 204) {
+                    console.log("file starred in Listfiles.js");
+                    this.props.addTodoNew();
+                }
+            });
+    };
     signin()
     {
         history.push('/login');
@@ -45,50 +59,86 @@ class Listfiles extends React.Component {
                 <div className="container-fluid" style={{backgroundColor:'#FAFAFA'}}>
                     <div>
                         <div className="row">
-                            <div className="col-md-4 col-lg-4 col-lg-pull-4" style={{width:10,paddingTop:20}}>
-                                <Mainhomeleftnav/>
-                            </div>
+                                <br/>
+                                <br/>
+                                    <div className="panel panel-default" style={{width:600}}>
+                                        <div className="panel-heading">
+                                            <h3 className="panel-title">Your Files</h3>
+                                        </div>
+                                        <div className="panel-body">
+                                            <ul>
+                                                {/*<li className="list-group-item" style={{width:500}}>
+                                                    <img src={require('../images/folder.png')} style={{width:20,height:20}}/>
+                                                    <label><DownloadLink filename={"folder1"} label={"folder1"}/></label>
+                                                    <button style={{bsSize:"xsmall",color:'blue',backgroundColor:'white',float:'right'}} className="glyphicon glyphicon-star"></button>
+                                                    <button className="btn" style={{color:'blue',backgroundColor:'white',float:'right'}}>Share</button>
+                                                </li>
+                                                <li className="list-group-item" style={{width:500}}>
+                                                    <img src={require('../images/folder.png')} style={{width:20,height:20}}/>
+                                                    <label><DownloadLink filename={"folder2"} label={"folder2"}/></label>
+                                                    <button style={{bsSize:"xsmall",color:'blue',backgroundColor:'white',float:'right'}} className="glyphicon glyphicon-star"></button>
+                                                    <button className="btn" style={{color:'blue',backgroundColor:'white',float:'right'}}>Share</button>
+                                                </li>
+                                                <li className="list-group-item" style={{width:500}}>
+                                                    <img src={require('../images/fileicon.png')} style={{width:20,height:20}}/>
+                                                    <label><DownloadLink filename={"HTML5:CSS:JS.png"} label={"HTML5:CSS:JS.png"}/></label>
+                                                    <button className="glyphicon glyphicon-star" style={{bsSize:"xsmall",color:'blue',backgroundColor:'white',float:'right'}}></button>
+                                                    <button className="btn" style={{color:'blue',backgroundColor:'white',float:'right'}}>Share</button>
+                                                </li>
+                                                <li className="list-group-item" style={{width:500}}>
+                                                    <img src={require('../images/fileicon.png')} style={{width:20,height:20}}/>
+                                                    <label><DownloadLink filename={"jmeter.svg"} label={"jmeter.svg"}/></label>
+                                                    <button className="glyphicon glyphicon-star" style={{bsSize:"xsmall",color:'blue',backgroundColor:'white',float:'right'}}></button>
+                                                    <button className="btn" style={{color:'blue',backgroundColor:'white',float:'right'}}>Share</button>
+                                                </li>
 
-                            <div className="col-md-7" style={{paddingTop:20}}>
-                                <h4>Dropbox</h4>
-                                <div className="input-group stylish-input-group">
-                                    <input type="text" className="form-control"  placeholder="Search"/>
-                                    <span className="input-group-addon">
-                                        <button type="submit">
-                                            <span className="glyphicon glyphicon-search"></span>
-                                        </button>
-                                    </span>
-                                </div>
-                                <br/>
-                                <br/>
-                                <button style={{bsSize:"xsmall"}} className="glyphicon glyphicon-star"></button>
-                                <listGroup componentClass="ul">
-                                {this.props.fileList.length > 0 ?
-                                    this.props.fileList.map((file) => {
-                                        return ( <div>
-                                            <button style={{bsSize:"xsmall"}} className="glyphicon glyphicon-star"></button>
-                                            <li><DownloadLink
-                                                filename={file}
-                                                label= {file}
-                                            /></li>
-                                            {/*<button className="btn btn-primary" onClick= {()=>this.handleShare(file)}>Share</button>
-                                <button className="btn btn-primary" onClick= {()=>this.deletefile(file)}>Delete</button>  */}
-                                            <br/>
-                                            <br/>
-                                        </div>);
+                                                <li className="list-group-item" style={{width:500}}>
+                                                    <img src={require('../images/fileicon.png')} style={{width:20,height:20}}/>
+                                                    <label><DownloadLink filename={"userimage.jpg"} label={"userimage.jpg"}/></label>
+                                                    <button className="glyphicon glyphicon-star" style={{bsSize:"xsmall",color:'blue',backgroundColor:'white',float:'right'}}></button>
+                                                    <button className="btn" style={{color:'blue',backgroundColor:'white',float:'right'}}>Share</button>
+                                                </li>
+                                                <li className="list-group-item" style={{width:500}}>
+                                                    <img src={require('../images/folder.png')} style={{width:20,height:20}}/>
+                                                    <label><DownloadLink filename={"usertrial"} label={"usertrial"}/></label>
+                                                    <button style={{bsSize:"xsmall",color:'blue',backgroundColor:'white',float:'right'}} className="glyphicon glyphicon-star"></button>
+                                                    <button className="btn" style={{color:'blue',backgroundColor:'white',float:'right'}}>Share</button>
+                                                </li>
+                                                <li className="list-group-item" style={{width:500}}>
+                                                    <img src={require('../images/fileicon.png')} style={{width:20,height:20}}/>
+                                                    <label><DownloadLink filename={"yellowstar.jpeg"} label={"yellowstar.jpeg"}/></label>
+                                                    <button className="glyphicon glyphicon-star" style={{bsSize:"xsmall",color:'blue',backgroundColor:'white',float:'right'}}></button>
+                                                    <button className="btn" style={{color:'blue',backgroundColor:'white',float:'right'}}>Share</button>
+                                                </li>*/}
+                                                {this.props.fileList.length > 0 ?
+                                                this.props.fileList.map((file) => {
+                                                    return (
+                                                    <div>
+
+                                                    <li className="list-group-item" style={{width:500}}>
+
+                                                    <label><DownloadLink
+                                                        filename={file}
+                                                        label= {file}/>
+                                                    </label>
+                                                    <button style={{bsSize:"xsmall",color:'blue',backgroundColor:'white',float:'right'}} className="glyphicon glyphicon-star" onClick= {()=>this.handleStar(file)}></button>
+                                                    <button className="btn" style={{color:'blue',backgroundColor:'white',float:'right'}} onClick= {()=>this.handleShare(file)}>Share</button>
+                                                </li>
+
+
+
+                                                {/*<button className="btn btn-primary" onClick= {()=>this.handleShare(file)}>Share</button>
+                                    <button className="btn btn-primary" onClick= {()=>this.deletefile(file)}>Delete</button>  */}
+                                                <br/>
+                                                <br/>
+
+                                            </div>);
                                     })
-
-                                    : ''
-
+                                    : "No Files"
                                 }
-                                </listGroup>
-                            </div>
-                            <div className="col-md-4 col-lg-4 col-lg-push-4" style={{backgroundColor:'#FAFAFA',width:270}}>
-                                <br/>
-                                &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-                                <img src={require('../images/user.png')} style={{width:40,height:40,float:'center'}} onClick={this.handleUser}/>
-                                <Fileupload/>
-                            </div>
+                                            </ul>
+                                        </div>
+                                    </div>
                         </div>
                     </div>
                 </div>

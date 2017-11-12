@@ -3,7 +3,7 @@ import { Route, withRouter } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Fileleftnav from './Fileleftnav';
-import ListDir from './ListDir';
+import Listfiles from './Listfiles';
 import Fileupload from'./Fileupload';
 class MainFilePage extends React.Component {
     componentDidMount(){
@@ -31,7 +31,7 @@ class MainFilePage extends React.Component {
                                 </div>
                                 <br/>
                                 <br/>
-                                <ListDir/>
+                                <Listfiles/>
                             </div>
                             <div className="col-md-4 col-lg-4 col-lg-push-4" style={{backgroundColor:'#FAFAFA',width:270}}>
                                 <Fileupload/>

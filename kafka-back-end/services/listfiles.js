@@ -5,7 +5,8 @@ var forloop = require('forloop');
 function handle_listfilesrequest(msg, callback){
     var res = {};
     console.log(msg.username);
-    testFolder += "pooja";
+    testFolder='./uploads/'+msg.username;
+    console.log(testFolder);
     fs.readdir(testFolder, function (err, files)
     {
         if (!err) {
@@ -18,6 +19,7 @@ function handle_listfilesrequest(msg, callback){
             res.status="401";
         }
         callback(null,res);
+
     });
 
 

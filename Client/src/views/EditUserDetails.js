@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { userActions } from '../_actions';
 import Mainhomeleftnav from './Mainhomeleftnav';
+import Fileupload from'./Fileupload';
 class EditUserDetails extends React.Component {
     constructor(props) {
         super(props);
@@ -68,7 +69,13 @@ class EditUserDetails extends React.Component {
                                 </div>
                                 <br/>
                                 <br/>
+                                <h3>Edit Account Details:</h3>
                                 <form name="form" onSubmit={this.handleSubmit}>
+                                    <div className="panel panel-default" style={{width:600}}>
+                                        <div className="panel-heading">
+                                            <h3 className="panel-title">Basic</h3>
+                                        </div>
+                                        <div className="panel-body">
                                     <div className={'form-group' + (submitted && !user.firstName ? ' has-error' : '')}>
                                         <label htmlFor="firstName">First Name</label>
                                         <input type="text" className="form-control" name="firstName" value={this.props.userdata.firstName} onChange={this.handleChange} />
@@ -92,30 +99,45 @@ class EditUserDetails extends React.Component {
                                     </div>
                                     <div className={'form-group' + (submitted && !user.password ? ' has-error' : '')}>
                                         <label htmlFor="password">Password</label>
-                                        <input type="password" className="form-control" name="password" value={this.props.userdata.password} onChange={this.handleChange} />
+                                        <input type="text" className="form-control" name="password" value={this.props.userdata.password} onChange={this.handleChange} />
                                         {submitted && !user.password &&
                                         <div className="help-block">Password required</div>
                                         }
                                     </div>
+                                        </div>
+                                    </div>
+                                    <div className="panel panel-default" style={{width:600}}>
+                                        <div className="panel-heading">
+                                            <h3 className="panel-title">Preferences</h3>
+                                        </div>
+                                        <div className="panel-body">
                                     <div className={'form-group' + (submitted && !user.work ? ' has-error' : '')}>
                                         <label htmlFor="work">Work</label>
-                                        <input type="work" className="form-control" name="work" value={this.props.userdata.work} onChange={this.handleChange} />
+                                        <input type="text" className="form-control" name="work" value={this.props.userdata.work} onChange={this.handleChange} />
                                     </div>
                                     <div className={'form-group' + (submitted && !user.education ? ' has-error' : '')}>
                                         <label htmlFor="education">Education</label>
-                                        <input type="education" className="form-control" name="education" value={this.props.userdata.education} onChange={this.handleChange} />
+                                        <input type="text" className="form-control" name="education" value={this.props.userdata.education} onChange={this.handleChange} />
                                     </div>
                                     <div className={'form-group' + (submitted && !user.phone ? ' has-error' : '')}>
                                         <label htmlFor="phone">Phone Number</label>
-                                        <input type="phone" className="form-control" name="phone" value={this.props.userdata.phone} onChange={this.handleChange} />
+                                        <input type="text6" className="form-control" name="phone" value={this.props.userdata.phone} onChange={this.handleChange} />
+                                    </div>
+                                        </div>
                                     </div>
                                     <div className="form-group">
                                         <button className="btn btn-primary">Submit</button>
-                                        { /* {registering &&
+                                         {registering &&
                                         <img src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
-                                        }*/}
+                                        }
                                     </div>
                                 </form>
+                            </div>
+                            <div className="col-md-4 col-lg-4 col-lg-push-4" style={{backgroundColor:'#FAFAFA',width:270}}>
+                                <br/>
+
+                                &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+                                <Fileupload/>
                             </div>
 
                         </div>

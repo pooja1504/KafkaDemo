@@ -3,7 +3,6 @@ import { userService } from '../_services';
 import { alertActions } from './';
 import { history } from '../_helpers';
 
-
 export const userActions = {
     login,
    logout,
@@ -26,7 +25,7 @@ function login(email, password) {
                     if(responseJson.code==200)
                     {
                     //dispatch(success(responseJson.user));
-                    history.push('/ListDir');
+                    history.push('/Mainhome');
                     }
                 
                 else

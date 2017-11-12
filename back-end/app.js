@@ -14,6 +14,7 @@ var handlefilelisting = require('./routes/handlefilelisting');
 var handleuserdetails=require('./routes/handleuserdetails')
 var mongoSessionURL = "mongodb://localhost:27017/KafkaDB";
 var expressSessions = require("express-session");
+var fileuploadroute = require('./routes/fileuploadroute');
 var mongoStore = require("connect-mongo/es5")(expressSessions);
 var app = express();
 
@@ -54,7 +55,10 @@ app.post('/sharefolder',handlefolder.sharefolder);
 app.post('/listfiles',handlefilelisting.listfiles);
 app.post('/userdetails',handleuserdetails.userdetails);
 app.put('/edituserdetails',handleuserdetails.edituserdetails);
-
+app.put('/edituserdetails',handleuserdetails.edituserdetails);
+app.post('/deletefile',handlefilelisting.deletefile);
+app.post('/starfile',handlefilelisting.starfile);
+app.use('/files',fileuploadroute);
 app.post('/logout', function(req,res) {
     console.log(req.session.user);
     req.session.destroy();
@@ -75,7 +79,7 @@ console.log(req.body.username);
             res.status(401).send();
         }
         req.session.username = user.username;
-        console.log(req.session.user);
+        console.log("its session in app.js"+req.session.username);
         console.log("session initilized");
         //return res;
         return res.status(201).send(user);

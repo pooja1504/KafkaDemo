@@ -9,7 +9,7 @@ function handle_userdetailsrequest(msg, callback){
     mongo.connect(mongoURL, function(){
         console.log('Connected to mongo at: ' + mongoURL);
         var coll = mongo.collection('users');
-        coll.findOne({username:"dev@gmail.com"}, function(err, user){
+        coll.findOne({username:msg.username}, function(err, user){
             if (user) {
                 res.code="200";
                 res.user=user;

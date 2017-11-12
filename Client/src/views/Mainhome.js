@@ -3,7 +3,7 @@ import { Route, withRouter } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Mainhomeleftnav from './Mainhomeleftnav';
-import ListDir from './ListDir';
+import Listfiles from './Listfiles';
 import Fileupload from'./Fileupload';
 import { history } from '../_helpers';
 import { userActions } from '../_actions';
@@ -39,13 +39,13 @@ class Mainhome extends React.Component {
                                 </div>
                                 <br/>
                                 <br/>
-                                <ListDir/>
+                                <Listfiles/>
                             </div>
                             <div className="col-md-4 col-lg-4 col-lg-push-4" style={{backgroundColor:'#FAFAFA',width:270}}>
                                 <br/>
 
                                 &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-                                <img src={require('../images/user.png')} style={{width:40,height:40,float:'center'}} onClick={this.handleUser}/>
+
                             <Fileupload/>
                             </div>
                         </div>

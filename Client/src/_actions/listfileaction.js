@@ -57,10 +57,9 @@ export function sendfileforshare(payload, sharing_email) {
   fileuploadserv.deletefile(file)
             .then((responseJson) => {
                console.log(responseJson);
-                dispatch(updateListFiles(responseJson));
-            },
-           
-            );}
+                dispatch(listfiles());
+            });
+    }
   }
   export function folderupload(myfolder){
       console.log("its func"+myfolder);
