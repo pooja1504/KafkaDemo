@@ -4,6 +4,7 @@ export const fileuploadserv = {
     sharefolder,
     listfiles,
     deletefile,
+    uploadFile,
     starfile
 };
 const headers = {
@@ -49,21 +50,21 @@ export const getImages = () =>
             return error;
         });
 
-export const uploadFile = (payload) =>
-
-    fetch(`${api}/files/upload`, {
+function uploadFile(payload) {
+console.log(payload);
+    return fetch(`${api}/files/upload`, {
         method: 'POST',
-        credentials:'include',
-        mode:'cors',
-        headers: { ...headers,'Content-Type': 'application/json' },
+        credentials: 'include',
+        mode: 'cors',
+        headers: {...headers, 'Content-Type': 'application/json'},
         body: JSON.stringify({payload})
     }).then(res => {
         return res;
     }).catch(error => {
-            console.log("This is error");
-            return error;
-        });
-
+        console.log("This is error");
+        return error;
+    });
+}
 
 function starfile(payload) {
     console.log(payload);

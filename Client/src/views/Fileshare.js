@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import * as fileuploadservice from '../_services/fileuploadservice';
 import { history } from '../_helpers';
 //import { listfileAction } from '../_actions';
-import Mainhomeleftnav from './Mainhomeleftnav';
+import Fileleftnav from './Fileleftnav';
 import ListDir from './ListDir';
 import Fileupload from'./Fileupload';
 import * as listfileaction from '../_actions/listfileaction';
@@ -47,7 +47,7 @@ render() {
                     <div>
                         <div className="row">
                             <div className="col-md-4 col-lg-4 col-lg-pull-4" style={{width:10,paddingTop:20}}>
-                                <Mainhomeleftnav/>
+                                <Fileleftnav/>
                             </div>
 
                             <div className="col-md-7" style={{paddingTop:20}}>
@@ -64,14 +64,14 @@ render() {
                                 <br/>
                                 <h4> Share with: </h4>
                                 <input type="email" placeholder="Enter email here" className="mm-popup__input" name="sharing_email" value={sharing_email} onChange={this.handleChange}/>
-                                <h4> File to be shared: </h4><textarea value={this.props.sharedfilename}/> <br/>
+                                <h4> File to be shared: </h4>
+                                <textarea value={this.props.sharedfilename}/> <br/>
                                 <button className="btn btn-primary" onClick= {()=>this.handleShare()}>Share</button>
                             </div>
                             <div className="col-md-4 col-lg-4 col-lg-push-4" style={{backgroundColor:'#FAFAFA',width:270}}>
                                 <br/>
 
                                 &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-                                <img src={require('../images/user.png')} style={{width:40,height:40,float:'center'}} onClick={this.handleUser}/>
                                 <Fileupload/>
                             </div>
                         </div>

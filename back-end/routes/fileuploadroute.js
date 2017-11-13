@@ -21,7 +21,6 @@ var storage = multer.diskStorage({
 
 var upload = multer({storage:storage});
 router.post('/upload', upload.single('mypic'), function (req, res, next) {
-
     var fileName = req.file.filename;
     var filePath= '../kafka-back-end/uploads/'+req.session.username+'/'+req.file.filename;
 

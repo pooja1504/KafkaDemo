@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
-import * as fileuploadservice from '../_services/fileuploadservice';
+import {fileuploadserv} from '../_services/fileuploadservice';
 import * as listfileaction from '../_actions/listfileaction';
 import { history } from '../_helpers';
 import MainFilePage from './MainFilePage';
@@ -26,6 +26,7 @@ class Fileupload extends React.Component {
         this.handleShareFolder = this.handleShareFolder.bind(this);
         this.FolderUpload =this.FolderUpload.bind(this);
         this.ShareFolder =this.ShareFolder.bind(this);
+        this.handleFileUpload=this.handleFileUpload.bind(this);
 
     }
 
@@ -33,12 +34,12 @@ class Fileupload extends React.Component {
     {
         history.push("/UserDetails");
     }
-    handleFileUpload = (event) => {
+    handleFileUpload(event){
         const payload = new FormData();
         payload.append('mypic', event.target.files[0]);
         console.log("inside handleUpoad");
         console.log(payload);
-        fileuploadservice.uploadFile(payload)
+        fileuploadserv.uploadFile(payload)
             .then((res) => {
                 if (res.status === 204) {
                     console.log("file uploaded");
@@ -96,13 +97,14 @@ class Fileupload extends React.Component {
         };
             return (
 
-                <div style={{backgroundColor: '', width: 1000, height: 800}}>
+                <div style={{backgroundColor: '', width: 700, height: 800}}>
                     <div className="col-sm-4">
                         <img src={require('../images/user.png')} style={{width:40,height:40,float:'center'}} onClick={this.handleUser}/>
+                        <button className="btn btn-info" style={{float:'center'}}>Logout</button>
                         <br/>
                         <br/>
                         <label className="btn btn-primary" style={upButton}>
-                            Upload Files<input type="file" onChange={this.handleFileUpload}/>
+                            Upload Files<input type="file" className={'fileupload'} name="mypic" onChange={this.handleFileUpload}/>
                         </label>
                         <br/>
                         <br/>

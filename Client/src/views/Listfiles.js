@@ -67,49 +67,6 @@ class Listfiles extends React.Component {
                                         </div>
                                         <div className="panel-body">
                                             <ul>
-                                                {/*<li className="list-group-item" style={{width:500}}>
-                                                    <img src={require('../images/folder.png')} style={{width:20,height:20}}/>
-                                                    <label><DownloadLink filename={"folder1"} label={"folder1"}/></label>
-                                                    <button style={{bsSize:"xsmall",color:'blue',backgroundColor:'white',float:'right'}} className="glyphicon glyphicon-star"></button>
-                                                    <button className="btn" style={{color:'blue',backgroundColor:'white',float:'right'}}>Share</button>
-                                                </li>
-                                                <li className="list-group-item" style={{width:500}}>
-                                                    <img src={require('../images/folder.png')} style={{width:20,height:20}}/>
-                                                    <label><DownloadLink filename={"folder2"} label={"folder2"}/></label>
-                                                    <button style={{bsSize:"xsmall",color:'blue',backgroundColor:'white',float:'right'}} className="glyphicon glyphicon-star"></button>
-                                                    <button className="btn" style={{color:'blue',backgroundColor:'white',float:'right'}}>Share</button>
-                                                </li>
-                                                <li className="list-group-item" style={{width:500}}>
-                                                    <img src={require('../images/fileicon.png')} style={{width:20,height:20}}/>
-                                                    <label><DownloadLink filename={"HTML5:CSS:JS.png"} label={"HTML5:CSS:JS.png"}/></label>
-                                                    <button className="glyphicon glyphicon-star" style={{bsSize:"xsmall",color:'blue',backgroundColor:'white',float:'right'}}></button>
-                                                    <button className="btn" style={{color:'blue',backgroundColor:'white',float:'right'}}>Share</button>
-                                                </li>
-                                                <li className="list-group-item" style={{width:500}}>
-                                                    <img src={require('../images/fileicon.png')} style={{width:20,height:20}}/>
-                                                    <label><DownloadLink filename={"jmeter.svg"} label={"jmeter.svg"}/></label>
-                                                    <button className="glyphicon glyphicon-star" style={{bsSize:"xsmall",color:'blue',backgroundColor:'white',float:'right'}}></button>
-                                                    <button className="btn" style={{color:'blue',backgroundColor:'white',float:'right'}}>Share</button>
-                                                </li>
-
-                                                <li className="list-group-item" style={{width:500}}>
-                                                    <img src={require('../images/fileicon.png')} style={{width:20,height:20}}/>
-                                                    <label><DownloadLink filename={"userimage.jpg"} label={"userimage.jpg"}/></label>
-                                                    <button className="glyphicon glyphicon-star" style={{bsSize:"xsmall",color:'blue',backgroundColor:'white',float:'right'}}></button>
-                                                    <button className="btn" style={{color:'blue',backgroundColor:'white',float:'right'}}>Share</button>
-                                                </li>
-                                                <li className="list-group-item" style={{width:500}}>
-                                                    <img src={require('../images/folder.png')} style={{width:20,height:20}}/>
-                                                    <label><DownloadLink filename={"usertrial"} label={"usertrial"}/></label>
-                                                    <button style={{bsSize:"xsmall",color:'blue',backgroundColor:'white',float:'right'}} className="glyphicon glyphicon-star"></button>
-                                                    <button className="btn" style={{color:'blue',backgroundColor:'white',float:'right'}}>Share</button>
-                                                </li>
-                                                <li className="list-group-item" style={{width:500}}>
-                                                    <img src={require('../images/fileicon.png')} style={{width:20,height:20}}/>
-                                                    <label><DownloadLink filename={"yellowstar.jpeg"} label={"yellowstar.jpeg"}/></label>
-                                                    <button className="glyphicon glyphicon-star" style={{bsSize:"xsmall",color:'blue',backgroundColor:'white',float:'right'}}></button>
-                                                    <button className="btn" style={{color:'blue',backgroundColor:'white',float:'right'}}>Share</button>
-                                                </li>*/}
                                                 {this.props.fileList.length > 0 ?
                                                 this.props.fileList.map((file) => {
                                                     return (
@@ -129,10 +86,8 @@ class Listfiles extends React.Component {
 
                                                 {/*<button className="btn btn-primary" onClick= {()=>this.handleShare(file)}>Share</button>
                                     <button className="btn btn-primary" onClick= {()=>this.deletefile(file)}>Delete</button>  */}
-                                                <br/>
-                                                <br/>
 
-                                            </div>);
+                                                </div>);
                                     })
                                     : "No Files"
                                 }
